@@ -41,7 +41,7 @@ id="cross"
   setTimeout(() => {
     body.appendChild(widgetModal);
     document
-      .querySelector(".widget_modal")
+      .querySelector(".widget_modal svg")
       .addEventListener("click", handleClose);
     body.appendChild(widgetCircle);
   }, 1000);
