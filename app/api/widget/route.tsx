@@ -10,14 +10,15 @@ const authorizedDomains = [
   "testing-widget.vercel.app/",
   "testing-widget-next.vercel.app",
   "localhost:3001",
+  "localhost:3000",
+  "localhost:5500",
 ];
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const apiKey = searchParams.get("apiKey");
-  const host = request.headers.get("host");
-  console.log(host);
-  if (validateApiKey(apiKey) && validateDomain(host)) {
+  const origin = request.headers.get("referer");
+  if (validateApiKey(apiKey) && validateDomain(origin)) {
     console.log(NextResponse.toString);
     const filePath = path.join(process.cwd(), "public", "index.js");
     const scriptContent = readFileSync(filePath, "utf8");
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest) {
     // res.sendFile(__dirname + "/index.js");
   } else {
     // Unauthorized access
-    return NextResponse.json(host, { status: 403 });
+    return NextResponse.json("Access Denied", { status: 403 });
   }
 }
 
