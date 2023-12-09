@@ -6,6 +6,7 @@ const authorizedDomains = [
   "https://testing-widget.vercel.app",
   "testing-widget.vercel.app",
   "testing-widget.vercel.app/",
+  "localhost",
 ];
 
 export async function GET(request: NextRequest) {
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const apiKey = searchParams.get("apiKey");
   const host = request.headers.get("Host");
-
+  console.log(host);
   if (validateApiKey(apiKey) && validateDomain(host)) {
     console.log(NextResponse.toString);
     const filePath = path.join(process.cwd(), "public", "index.js");
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
     // res.sendFile(__dirname + "/index.js");
   } else {
     // Unauthorized access
-    return NextResponse.json("Access deniend", { status: 403 });
+    return NextResponse.json(host, { status: 403 });
   }
 }
 
@@ -37,6 +38,8 @@ function validateApiKey(apiKey: string | null) {
 function validateDomain(requestedDomain: string | null) {
   // Implement logic to validate the requesting domain against your list of authorized domains
   if (requestedDomain) {
+    console.log(authorizedDomains, requestedDomain.toString());
+    console.log(authorizedDomains.includes(requestedDomain));
     return authorizedDomains.includes(requestedDomain);
   }
   return;
