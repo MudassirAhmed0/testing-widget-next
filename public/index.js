@@ -10,7 +10,7 @@ link.rel = "stylesheet";
 
 link.type = "text/css";
 
-link.href = "https://testing-widget.vercel.app/style.css";
+link.href = "https://testing-widget-next.vercel.app/style.css";
 
 // Append link element to HTML head
 head.appendChild(link);
