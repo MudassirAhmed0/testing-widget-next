@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const handleClose = () => {
     widgetModal.classList.remove("show");
   };
-  widgetModal.innerHTML = `<svg
-onclick="handleClose()"
+  widgetModal.innerHTML = `<svg 
 xmlns="http://www.w3.org/2000/svg"
 viewBox="0 0 101 101"
 id="cross"
@@ -41,6 +40,9 @@ id="cross"
 
   setTimeout(() => {
     body.appendChild(widgetModal);
+    document
+      .querySelector(".widget_modal")
+      .addEventListener("click", handleClose);
     body.appendChild(widgetCircle);
   }, 1000);
 });
