@@ -5,21 +5,22 @@ const authorizedDomains = [
   "https://testing-widget.vercel.app/",
   "https://testing-widget.vercel.app",
   "testing-widget.vercel.app",
+  "testing-widget",
+  "testing-widget.vercel",
   "testing-widget.vercel.app/",
-  "localhost",
+  "testing-widget-next.vercel.app",
+  "localhost:3001",
 ];
 
 export async function GET(request: NextRequest) {
-  console.log(request);
   const { searchParams } = new URL(request.url);
   const apiKey = searchParams.get("apiKey");
-  const host = request.headers.get("Host");
+  const host = request.headers.get("host");
   console.log(host);
   if (validateApiKey(apiKey) && validateDomain(host)) {
     console.log(NextResponse.toString);
     const filePath = path.join(process.cwd(), "public", "index.js");
     const scriptContent = readFileSync(filePath, "utf8");
-    console.log(scriptContent);
     // Serve the widget script
     return new Response(scriptContent);
 
