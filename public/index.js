@@ -1,26 +1,27 @@
-// Get HTML head element
-let head = document.getElementsByTagName("HEAD")[0];
-let body = document.querySelector("body");
+document.addEventListener("DOMContentLoaded", function () {
+  // Get HTML head element
+  let head = document.getElementsByTagName("HEAD")[0];
+  let body = document.querySelector("body");
 
-// Create new link Element
-let link = document.createElement("link");
+  // Create new link Element
+  let link = document.createElement("link");
 
-// set the attributes for link element
-link.rel = "stylesheet";
+  // set the attributes for link element
+  link.rel = "stylesheet";
 
-link.type = "text/css";
+  link.type = "text/css";
 
-link.href = "https://testing-widget-next.vercel.app/style.css";
+  link.href = "https://testing-widget-next.vercel.app/style.css";
 
-// Append link element to HTML head
-head.appendChild(link);
+  // Append link element to HTML head
+  head.appendChild(link);
 
-const widgetModal = document.createElement("div");
-widgetModal.classList.add("widget_modal");
-const handleClose = () => {
-  widgetModal.classList.remove("show");
-};
-widgetModal.innerHTML = `<svg
+  const widgetModal = document.createElement("div");
+  widgetModal.classList.add("widget_modal");
+  const handleClose = () => {
+    widgetModal.classList.remove("show");
+  };
+  widgetModal.innerHTML = `<svg
 onclick="handleClose()"
 xmlns="http://www.w3.org/2000/svg"
 viewBox="0 0 101 101"
@@ -31,14 +32,15 @@ id="cross"
 ></path>
 </svg>`;
 
-const widgetCircle = document.createElement("div");
-widgetCircle.classList.add("widget_circle");
-const handleWidgetCircleClick = () => {
-  widgetModal.classList.add("show");
-};
-widgetCircle.addEventListener("click", handleWidgetCircleClick);
+  const widgetCircle = document.createElement("div");
+  widgetCircle.classList.add("widget_circle");
+  const handleWidgetCircleClick = () => {
+    widgetModal.classList.add("show");
+  };
+  widgetCircle.addEventListener("click", handleWidgetCircleClick);
 
-setTimeout(() => {
-  body.appendChild(widgetModal);
-  body.appendChild(widgetCircle);
-}, 1000);
+  setTimeout(() => {
+    body.appendChild(widgetModal);
+    body.appendChild(widgetCircle);
+  }, 1000);
+});

@@ -1,20 +1,24 @@
 import { readFileSync } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
-const authorizedDomains = ["jjj.com"];
+const authorizedDomains = [
+  "https://testing-widget.vercel.app/",
+  "https://testing-widget.vercel.app",
+  "testing-widget.vercel.app",
+  "testing-widget.vercel.app/",
+];
 
 export async function GET(request: NextRequest) {
   console.log(request);
   const { searchParams } = new URL(request.url);
   const apiKey = searchParams.get("apiKey");
-  console.log(apiKey);
+  const host = request.headers.get("Host");
 
-  if (validateApiKey(apiKey)) {
+  if (validateApiKey(apiKey) && validateDomain(host)) {
     console.log(NextResponse.toString);
     const filePath = path.join(process.cwd(), "public", "index.js");
     const scriptContent = readFileSync(filePath, "utf8");
     console.log(scriptContent);
-    // const host = request.headers.get("Host");
     // Serve the widget script
     return new Response(scriptContent);
 
@@ -30,7 +34,10 @@ function validateApiKey(apiKey: string | null) {
   return apiKey === "yourApiKey"; // Replace with your actual validation logic
 }
 
-function validateDomain(requestedDomain: string) {
+function validateDomain(requestedDomain: string | null) {
   // Implement logic to validate the requesting domain against your list of authorized domains
-  return authorizedDomains.includes(requestedDomain);
+  if (requestedDomain) {
+    return authorizedDomains.includes(requestedDomain);
+  }
+  return;
 }
