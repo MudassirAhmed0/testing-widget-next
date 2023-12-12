@@ -11,8 +11,9 @@ const authorizedDomains = [
   "testing-widget-next.vercel.app",
   "localhost:3001",
   "localhost:3000",
-  "localhost:5500",
+  "http://localhost:5500/",
   "https://projects.brackets-tech.com/labeeb_widget/",
+  "https://projects.brackets-tech.com/",
   "projects.brackets-tech.com/labeeb_widget",
   "projects.brackets-tech.com",
 ];
