@@ -12,6 +12,9 @@ const authorizedDomains = [
   "localhost:3001",
   "localhost:3000",
   "localhost:5500",
+  "https://projects.brackets-tech.com/labeeb_widget/",
+  "projects.brackets-tech.com/labeeb_widget",
+  "projects.brackets-tech.com",
 ];
 
 export async function GET(request: NextRequest) {
